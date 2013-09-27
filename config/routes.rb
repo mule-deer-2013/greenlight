@@ -1,4 +1,7 @@
 Greenlight::Application.routes.draw do
+
+  resources :users, only: [:index, :new, :create, :show]
+  root to: 'users#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
