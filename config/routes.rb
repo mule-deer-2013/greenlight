@@ -1,6 +1,6 @@
 Greenlight::Application.routes.draw do
   resources :sessions
-  resources :users, only: [:index, :new, :create, :show, :edit]
+  resources :users, only: [:index, :new, :create, :show, :edit, :update]
   root to: 'users#index'
 
   match 'auth/:provider/callback', to: 'sessions#create'
