@@ -21,8 +21,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'rspec-rails'
 group :development, :test do
-  gem 'rspec-rails'
+  
   gem 'shoulda-matchers'
 
 end
