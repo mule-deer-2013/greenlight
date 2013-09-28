@@ -1,12 +1,12 @@
 OmniAuth.config.logger = Rails.logger
 
-Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], :display => "popup"
-end
-
 # Rails.application.config.middleware.use OmniAuth::Builder do
-#   provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], :display => "popup", {:scope => 'PERMISSION_1, PERMISSION_2' :client_options => { :ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+#   provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], :display => "popup"
 # end
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'], :display => "popup", :client_options => { :ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+end
 
 # Rails.application.config.middleware.use OmniAuth::Builder do
 # 	if Rails.env.development?
