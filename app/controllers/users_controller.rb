@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-   	@user = User.first
+   	@user = User.find(current_user.id)
     render :json => @user.to_json, :callback => params[:callback]
   end
 
