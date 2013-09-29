@@ -8,8 +8,9 @@ class UsersController < ApplicationController
   end
 
   def update
-  	current_user.update_attribute(sex_preference: params[:sex_preference])
-  	current_user.update_attribute(tag_line: params[:tag_line])
+  	user = User.find(params[:id])
+    user.update_attributes(sex_preference: params[:sex_preference, tagline: params[:tagline], sex: params[:sex])
+    render :json => user.to_json, :callback => params[:callback]
   end
 
   def show
