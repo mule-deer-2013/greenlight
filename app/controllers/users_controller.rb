@@ -4,13 +4,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.new
+    @user = User.find(params[:id])
   end
 
   def update
   	user = User.find(params[:id])
-    user.update_attributes(sex_preference: params[:sex_preference, tagline: params[:tagline], sex: params[:sex])
-    render :json => user.to_json, :callback => params[:callback]
+    user.update_attributes(tagline: params[:user][:tagline])
+    redirect_to user_path
   end
 
   def show
@@ -18,6 +18,17 @@ class UsersController < ApplicationController
     render :json => @user.to_json, :callback => params[:callback]
   end
 
+  def create
+    user = User.new(tagline: params[:tagline])
+    user.save
+    redirect_to user_path(user)
+  end
+
+  def new
+    @user = User.new
+  end
+
 end
+
 
 

@@ -1,0 +1,5 @@
+<%= form_for @user, url: {action: "create"}   do |f| %>
+  <%= f.label :tagline, 'Tagline' %>:
+   <%= f.text_field :tagline %><br /> 
+  <%= f.submit "Update Profile" %>
+<% end %>
