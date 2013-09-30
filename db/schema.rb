@@ -11,22 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130927070951) do
+ActiveRecord::Schema.define(:version => 20130929220452) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.date     "birthday"
+    t.integer  "age"
     t.string   "email"
     t.string   "sex"
     t.string   "sex_preference"
     t.string   "tagline"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "oauth_token"
-    t.string   "oauth_expires_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "photo"
+    t.string   "password_digest"
   end
 
 end
