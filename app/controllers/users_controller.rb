@@ -27,14 +27,24 @@ class UsersController < ApplicationController
     user.password = params[:password]
 
     if user.save
-      login(user)
+      #login(user)
       # redirect_to user_path(user)
-      render :json => @user.to_json, :callback => params[:callback]
+      # render :json => @user.to_json, :callback => params[:callback]
+      # { "name": "Jeff Donios",
+      #   "age": "25",
+      #   "sex":"M",
+      #   "sex_preference": "women",
+      #   "email": "test@test.com",
+      #   "tagline": "i am batman",
+      #   "success": "true"
+      # }
+      render :json => "success"
     else
-      flash[:notice] = @user.errors.full_messages 
+      #flash[:notice] = @user.errors.full_messages 
       # how can we show errors on front-end without erb?
       # send flash[:notice] as a JSON object maybe 
-      redirect_to new_user_path 
+      #redirect_to new_user_path 
+      render :json => "false"
     end
 
   end
