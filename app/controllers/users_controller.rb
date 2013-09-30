@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :cors
   def index
-    
+    render :json => {:hey => "hello"}  
   end
 
   def edit
