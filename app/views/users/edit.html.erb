@@ -1,8 +1,8 @@
 <br>
-<img src="https://graph.facebook.com/<%= current_user.uid %>/picture?type=large" alt="some_text">
+<img src="https://graph.facebook.com/<%= @user.uid %>/picture?type=large" alt="some_text">
 <br>
 <br>
-<%= form_for @user do |f| %>
+<%= form_for @user, url: {action: "update"}   do |f| %>
   <%= f.label :birthday, 'Birthday' %>:
   <%= f.date_select(:birthday, :order => [:month, :day, :year]) %><br />
   <%= f.label :sex_preference, 'Sexual Preference' %>:
