@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   before_filter :cors
+
   def index
-    render :json => {:hey => "hello"}  
+    # @user = User.all.first # hard-coded, not restful
+    # render :json => { :user => @user }  
   end
 
   def edit
@@ -14,7 +16,8 @@ class UsersController < ApplicationController
   end
 
   def show
-   	@user = User.find(params[:id])
+   	@user = User.all.first
+    render :json => { :user => @user } 
   end
 
 end
