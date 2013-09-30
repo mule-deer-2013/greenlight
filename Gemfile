@@ -31,10 +31,10 @@ end
 gem 'rails_12factor', group: :production
 
 gem 'jquery-rails'
-gem 'omniauth-facebook', '1.4.0'
+#gem 'omniauth-facebook', '1.4.0'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

@@ -19,7 +19,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(tagline: params[:tagline])
+    user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline])
+    user.password = params[:password]
     user.save
     redirect_to user_path(user)
   end
