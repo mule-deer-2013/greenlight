@@ -23,8 +23,7 @@ class UsersController < ApplicationController
     user.password = params[:password]
 
     if user.save
-
-      render :json => "success"
+      render :json => user.to_json
     else
 
       render :json => "false"

@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20130929220452) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.integer  "age"
+    t.string   "age"
     t.string   "email"
     t.string   "sex"
     t.string   "sex_preference"
