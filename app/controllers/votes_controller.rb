@@ -10,12 +10,11 @@ class VotesController < ApplicationController
   end
 
   def create
-    p params
-
     vote = Vote.new(voter_id: 1, voted_on_id: params[:id])
     vote.opinion = "yes"
     vote.save
-    current_user.votes << vote
+    User.first.votes << vote
+    render json: vote.to_json
   end
 
 end
