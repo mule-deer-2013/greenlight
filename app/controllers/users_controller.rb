@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   def index
     randomUI = User.all.count
     user = User.find(rand(1..randomUI))
-    render :json => user.to_json
+    photo = user.photo
+    render :json => {user: user, photo: photo}.to_json
 
   end
 
