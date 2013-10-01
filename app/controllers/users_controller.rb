@@ -1,6 +1,12 @@
 
 class UsersController < ApplicationController
   before_filter :cors
+  before_filter :important_stuff
+
+  def important_stuff #also, maybe this could be defined in sessions controller
+    ## you are logged in
+    ## AND the profile you are attempting to view/create/update/edit/whatever is absolutely your profile
+  end
 
   def index
     randomUI = User.all.count
