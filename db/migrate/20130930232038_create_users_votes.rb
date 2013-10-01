@@ -7,4 +7,3 @@ class CreateUsersVotes < ActiveRecord::Migration
   end
 end
 
-# User.find(richie.id).votes.where(voted_on_id: dude.id).first.opinion == User.find(dude.id).votes.where(voted_on_id: richie.id).first.opinion
