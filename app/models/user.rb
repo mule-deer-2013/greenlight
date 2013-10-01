@@ -13,5 +13,7 @@ class User < ActiveRecord::Base
   :path => ":attachment/:id/:style.:extension",
   :bucket => "greenlight"
   
+  has_and_belongs_to_many :votes
+
 
 end

@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20131001013823) do
 
   create_table "users", :force => true do |t|
@@ -27,6 +28,19 @@ ActiveRecord::Schema.define(:version => 20131001013823) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.string   "photo"
+  end
+
+  create_table "users_votes", :force => true do |t|
+    t.integer "user_id"
+    t.integer "vote_id"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "voter_id"
+    t.integer  "voted_on_id"
+    t.string   "opinion"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end
