@@ -1,11 +1,13 @@
+
 class UsersController < ApplicationController
   before_filter :cors
 
   def index
     randomUI = User.all.count
     user = User.find(rand(1..randomUI))
-    render :json => user.to_json
-
+    photo = user.photo
+    user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo_url: photo.url }
+    render :json => user_data.to_json
   end
 
   def edit
@@ -18,13 +20,18 @@ class UsersController < ApplicationController
   end
 
   def show
-   	@user = User.all.last
-    render :json => { :user => @user } 
+    raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
+    offset = rand(User.count)
+    user = User.first(:offset => offset)
+    user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
+    render :json => user_data.to_json
   end
 
   def create
     user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
+    p "*"*40
+    p params[:photo]
 
 
     if user.save
