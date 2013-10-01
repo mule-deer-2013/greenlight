@@ -14,20 +14,25 @@ class UsersController < ApplicationController
   end
 
   def update
+    p params
   	user = User.find(params[:id])
-    user.update_attributes(sex_preference: params[:sex_preference], tagline: params[:tagline], sex: params[:sex])
+    user.update_attributes(longitude: params[:longitude])
+    render :json => { :user => @user }
+
+    # user.update_attributes(sex_preference: params[:sex_preference], tagline: params[:tagline], sex: params[:sex])
   end
 
   def show
    	@user = User.all.last
-    render :json => { :user => @user } 
+    render :json => { :user => @user }
   end
 
   def create
     user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
     p "*"*40
-    p params[:photo]
+    p params
+
 
 
     if user.save
