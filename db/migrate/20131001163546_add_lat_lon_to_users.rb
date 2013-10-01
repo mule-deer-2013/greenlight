@@ -1,4 +1,4 @@
-class Users < ActiveRecord::Migration
+class AddLatLonToUsers < ActiveRecord::Migration
   def up
     add_column :users, :longtitude, :integer
     add_column :users, :latitude, :integer
