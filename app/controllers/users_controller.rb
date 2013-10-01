@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   def index
     randomUI = User.all.count
     user = User.find(rand(1..randomUI))
-    render :json => user.to_json
+    photo = user.photo
+    render :json => {user: user, photo: photo}.to_json
 
   end
 
@@ -26,6 +27,8 @@ class UsersController < ApplicationController
   def create
     user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
+    p "*"*40
+    p params[:photo]
 
 
     if user.save
