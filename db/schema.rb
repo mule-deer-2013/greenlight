@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20131001192022) do
+=======
+ActiveRecord::Schema.define(:version => 20131001191831) do
+>>>>>>> f54976374b4f661e08d8d16d20147c39c08e9478
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -26,9 +30,14 @@ ActiveRecord::Schema.define(:version => 20131001192022) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
+<<<<<<< HEAD
     t.string   "location"
     t.string   "longitude"
     t.string   "latitude"
+=======
+    t.integer  "longtitude"
+    t.integer  "latitude"
+>>>>>>> f54976374b4f661e08d8d16d20147c39c08e9478
   end
 
   create_table "users_votes", :force => true do |t|
@@ -43,5 +52,7 @@ ActiveRecord::Schema.define(:version => 20131001192022) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "votes", ["voter_id"], :name => "index_votes_on_voter_id"
 
 end
