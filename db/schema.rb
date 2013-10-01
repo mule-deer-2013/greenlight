@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(:version => 20131001191831) do
 
+  create_table "matches", :force => true do |t|
+    t.integer "user_1"
+    t.integer "user_2"
+    t.string  "user_1_vote"
+    t.string  "user_2_vote"
+    t.string  "match_status", :default => "Pending"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "age"
