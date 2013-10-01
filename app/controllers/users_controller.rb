@@ -15,13 +15,14 @@ class UsersController < ApplicationController
   end
 
   def show
-   	@user = User.all.first
+   	@user = User.all.last
     render :json => { :user => @user } 
   end
 
   def create
-    user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline])
+    user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
+
 
     if user.save
       render :json => user.to_json
