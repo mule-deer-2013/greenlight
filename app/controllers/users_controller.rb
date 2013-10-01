@@ -25,6 +25,8 @@ class UsersController < ApplicationController
   def create
     user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
+    p "*"*40
+    p params[:photo]
 
 
     if user.save
