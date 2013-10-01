@@ -1,5 +1,6 @@
 Greenlight::Application.routes.draw do
   resources :sessions
+  resources :votes
   resources :users, only: [:index, :new, :create, :show, :edit, :update]
   root to: 'users#index'
 

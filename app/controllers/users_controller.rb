@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_filter :cors
   def index
-
-    render :json => {:hey => "hello"}
+    randomUI = User.all.count
+    user = User.find(rand(1..randomUI))
+    render :json => user.to_json
   end
 
   def edit
@@ -23,9 +24,9 @@ class UsersController < ApplicationController
     user.password = params[:password]
 
     if user.save
+      login(user)
       render :json => user.to_json
     else
-
       render :json => "false"
     end
 
