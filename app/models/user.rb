@@ -23,14 +23,14 @@ class User < ActiveRecord::Base
     # after_create :create_distances
     # after_save :calculate
 
-  
+
 
     def get_potentials_for_user
-  
+
     if self.sex == 'male'
       if self.sex_preference == "men"
-        User.where(sex: "male", sex_preference: "men") 
-      elsif self.sex_preference == "female"
+        User.where(sex: "male", sex_preference: "men")
+      elsif self.sex_preference == "women"
         User.where(sex: "female", sex_preference: "men")
       elsif self.sex_preference == "both"
         User.where(sex_preference: "men") && User.where(sex_preference: "women")
