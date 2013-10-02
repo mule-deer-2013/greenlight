@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :cors
+>>>>>>> master
 
   def index
     randomUI = User.all.count
@@ -37,19 +39,13 @@ class UsersController < ApplicationController
     end
   end
 
+
   def create
     user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
-    p "*"*40
-    p params
 
-    p "FIRST SAVE BEFORE!!!!!!"
     if user.save
-      p user
-      p "FIRST SAVE AFTER!!!!!!"
       login(user)
-      p current_user == user
-      p logged_in?
       render :json => current_user.to_json
     else
       render :json => ("false").to_json

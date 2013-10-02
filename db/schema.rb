@@ -11,14 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001191831) do
+
+ActiveRecord::Schema.define(:version => 20131002050436) do
+
+
+  create_table "distances", :force => true do |t|
+    t.integer "user_id"
+    t.integer "stranger_id"
+    t.float   "distance"
+  end
 
   create_table "matches", :force => true do |t|
     t.integer "user_1"
     t.integer "user_2"
     t.string  "user_1_vote"
     t.string  "user_2_vote"
-    t.string  "match_status", :default => "Pending"
+    t.string  "match_status"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "reciever_id"
+    t.text     "content"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -28,14 +44,14 @@ ActiveRecord::Schema.define(:version => 20131001191831) do
     t.string   "sex"
     t.string   "sex_preference"
     t.string   "tagline"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "password_digest"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
-    t.integer  "longitude"
-    t.integer  "latitude"
+    t.float    "longitude",          :default => 0.0
+    t.float    "latitude",           :default => 0.0
     t.string   "location"
   end
 

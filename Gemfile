@@ -42,6 +42,8 @@ gem 'paperclip'
 gem 'aws-s3'
 gem 'aws-sdk'
 gem 'rmagick'
+gem 'geocoder'
+gem 'haversine'
 
 
 # Use unicorn as the app server
