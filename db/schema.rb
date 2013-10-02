@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002035357) do
+ActiveRecord::Schema.define(:version => 20131002050436) do
 
   create_table "distances", :force => true do |t|
-    t.integer "current_user_id"
-    t.integer "other_user_id"
-    t.integer "distance"
+    t.integer "user_id"
+    t.integer "stranger_id"
+    t.float   "distance"
   end
 
   create_table "matches", :force => true do |t|

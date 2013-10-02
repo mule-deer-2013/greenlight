@@ -27,8 +27,8 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   end
 
-  def authenticate!(password)
-    #set status to :unauthorized (401) unless logged_in?
-  end
+  # def authenticate!(password)
+  #   #set status to :unauthorized (401) unless logged_in?
+  # end
 
 end
