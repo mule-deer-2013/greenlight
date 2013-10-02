@@ -21,12 +21,14 @@ class UsersController < ApplicationController
   end
 
   def update
+       p "*"*40
     p params
+       p "*"*40
   	user = User.find(params[:id])
-    user.update_attributes(longitude: params[:longitude])
+    user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
     render :json => { :user => @user }
 
-    # user.update_attributes(sex_preference: params[:sex_preference], tagline: params[:tagline], sex: params[:sex])
+
   end
 
   def show

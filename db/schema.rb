@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20131001191831) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
-    t.integer  "longtitude"
+    t.integer  "longitude"
     t.integer  "latitude"
     t.string   "location"
   end
