@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_filter :cors
->>>>>>> master
 
   def index
     randomUI = User.all.count
