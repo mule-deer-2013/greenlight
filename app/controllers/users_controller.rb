@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def update
     #do i have to have if statement here?
     if current_user
-      current_user.update_attributes(sex_preference: params[:sex_preference], tagline: params[:tagline], sex: params[:sex])
+      current_user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
       render :json => current_user.to_json
     else
       render :json => "current_user does not exist"
@@ -25,18 +25,21 @@ class UsersController < ApplicationController
   end
 
   def show
+
     raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
     offset = rand(User.count)
     user = User.first(:offset => offset)
     user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
     render :json => user_data.to_json
+
   end
 
   def create
     user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
     p "*"*40
-    p params[:photo]
+    p params
+
 
     if user.save
       login(user)

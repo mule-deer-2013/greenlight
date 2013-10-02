@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery except: [:show, :create]
+  protect_from_forgery except: [:show, :create, :update]
 
   helper_method :current_user, :logged_in?, :login, :logout, :authenticate!
 
