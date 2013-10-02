@@ -60,6 +60,7 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (2.0.1)
+    geocoder (1.1.8)
     hike (1.2.3)
     i18n (0.6.1)
     jbuilder (1.5.1)
@@ -161,6 +162,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
   debugger
+  geocoder
   jbuilder
   jquery-rails
   paperclip
