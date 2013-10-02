@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     def create_distances
       User.all.each do |stranger|
         haversine_distance = Haversine.distance(self.latitude, self.longitude, stranger.latitude, stranger.longitude)
-        Distance.create(distance: haversine_distance.to_miles, user_id: self.id, stranger_id: stranger.id)
+        Distance.create(distance: haversine_distance.to_feet, user_id: self.id, stranger_id: stranger.id)
       end
     end
   end

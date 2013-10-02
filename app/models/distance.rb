@@ -11,7 +11,7 @@ class Distance < ActiveRecord::Base
     user = User.find(user_id)
     stranger = self.stranger
     haversine_distance = Haversine.distance(user.latitude, user.longitude, stranger.latitude, stranger.longitude)
-    self.distance = haversine_distance.to_miles
+    self.distance = haversine_distance.to_feet
 
   end
 end
