@@ -1,10 +1,11 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery except: [:show, :create, :update]
+  before_filter :cors
+  protect_from_forgery except: [:show, :create, :update, :destroy]
 
   helper_method :current_user, :logged_in?, :login, :logout
 
-  def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
+ def current_user
+    current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
   end
 
   def logged_in?
@@ -17,7 +18,6 @@ class ApplicationController < ActionController::Base
 
   def logout
     session.clear
-    flash[:notice] = "You have successfully logged out."
   end
 
   def cors
@@ -26,6 +26,5 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   end
-
 
 end

@@ -1,4 +1,3 @@
-
 class UsersController < ApplicationController
   before_filter :cors
 
@@ -15,20 +14,26 @@ class UsersController < ApplicationController
   end
 
   def update
-  	user = User.find(params[:id])
-    user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
-    render :json => { :user => @user }
+    #do i have to have if statement here?
+    if current_user
+      current_user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
+      render :json => current_user.to_json
+    else
+      render :json => ("current_user does not exist").to_json
+    end
   end
 
   def show
     p params
     #current user that votes 
-    user = User.find(params[:id])
+    
     # raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
     # offset = rand(User.count)
     # user = User.first(:offset => offset)
     # psuedocode: write method that returns a user object according to the 
     # users sex and their sex_pref.  
+
+    user = User.find(params[:id])
     p "*******************************"
     p user
     potential = user.get_potentials_for_user
@@ -45,23 +50,32 @@ class UsersController < ApplicationController
       render :json => user_data.to_json
     end
 
+# =======
+#     p "******************************************"
+#     p params
+#     p current_user
+#     if logged_in?
+#       raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
+#       offset = rand(User.count)
+#       user = User.first(:offset => offset)
+#       user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
+#       render :json => user_data.to_json
+#     else
+#       render :json => ("please log in").to_json
+#     end
+# >>>>>>> master
   end
+
 
   def create
     user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
-    p "user*"*20
-    p user
-    p "params*"*20
-    p params
-
 
     if user.save
       login(user)
-      #should i use user.to_json or current_user.to_json here?
-      render :json => user.to_json
+      render :json => current_user.to_json
     else
-      render :json => "false"
+      render :json => ("false").to_json
     end
 
   end

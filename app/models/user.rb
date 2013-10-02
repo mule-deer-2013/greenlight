@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
+  include BCrypt
   has_secure_password
-  attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo
-  validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
-  validates_uniqueness_of :email
-  # # geocoded_by :latitude, :longitude
-  # after_create :geocode
+
+  attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo, :longitude, :latitude
+  # validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
+  # validates_uniqueness_of :email
 
 
   has_attached_file :photo,
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
         Distance.create(distance: haversine_distance.to_feet, user_id: self.id, stranger_id: stranger.id)
       end
     end
-  end
 
+end
 
 
