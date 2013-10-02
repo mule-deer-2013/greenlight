@@ -1,6 +1,6 @@
 
 class UsersController < ApplicationController
-  before_filter :cors, :authenticate!
+  before_filter :cors
 
   def index
     randomUI = User.all.count
@@ -15,17 +15,13 @@ class UsersController < ApplicationController
   end
 
   def update
-
   	user = User.find(params[:id])
     user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
     render :json => { :user => @user }
   end
 
   def show
-
-    raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
-    offset = rand(User.count)
-    user = User.first(:offset => offset)
+    user = User.find(rand(1..User.all.count))
     user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
     render :json => user_data.to_json
 
@@ -41,7 +37,7 @@ class UsersController < ApplicationController
     if user.save
       login(user)
       #should i use user.to_json or current_user.to_json here?
-      render :json => current_user.to_json
+      render :json => user.to_json
     else
       render :json => "false"
     end
