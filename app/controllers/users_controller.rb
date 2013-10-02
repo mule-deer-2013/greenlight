@@ -25,13 +25,7 @@ class UsersController < ApplicationController
 
   def show
     p params
-    #current user that votes 
-    
-    # raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
-    # offset = rand(User.count)
-    # user = User.first(:offset => offset)
-    # psuedocode: write method that returns a user object according to the 
-    # users sex and their sex_pref.  
+    #current user that votes
 
     user = User.find(params[:id])
     p "*******************************"
