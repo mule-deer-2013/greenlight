@@ -1,6 +1,4 @@
-
 class UsersController < ApplicationController
-  before_filter :cors, :authenticate!
 
   def index
     randomUI = User.all.count
@@ -20,18 +18,23 @@ class UsersController < ApplicationController
       current_user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
       render :json => current_user.to_json
     else
-      render :json => "current_user does not exist"
+      render :json => ("current_user does not exist").to_json
     end
   end
 
   def show
-
-    raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
-    offset = rand(User.count)
-    user = User.first(:offset => offset)
-    user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
-    render :json => user_data.to_json
-
+    p "******************************************"
+    p params
+    p current_user
+    if logged_in?
+      raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
+      offset = rand(User.count)
+      user = User.first(:offset => offset)
+      user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
+      render :json => user_data.to_json
+    else
+      render :json => ("please log in").to_json
+    end
   end
 
   def create
@@ -40,13 +43,16 @@ class UsersController < ApplicationController
     p "*"*40
     p params
 
-
+    p "FIRST SAVE BEFORE!!!!!!"
     if user.save
+      p user
+      p "FIRST SAVE AFTER!!!!!!"
       login(user)
-      #should i use user.to_json or current_user.to_json here?
+      p current_user == user
+      p logged_in?
       render :json => current_user.to_json
     else
-      render :json => "false"
+      render :json => ("false").to_json
     end
 
   end

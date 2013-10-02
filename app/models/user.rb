@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+  include BCrypt
   has_secure_password
   attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo, :longitude, :latitude
-  validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
-  validates_uniqueness_of :email
+  # validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
+  # validates_uniqueness_of :email
 
   has_attached_file :photo,
   :styles => {
@@ -14,6 +15,5 @@ class User < ActiveRecord::Base
   :bucket => "greenlight"
 
   has_and_belongs_to_many :votes
-
 
 end
