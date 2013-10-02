@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   :bucket => "greenlight"
   
   has_and_belongs_to_many :votes
+  has_many :matches
+  has_many :pairs, :through => :matches 
+  has_many :recievers, :through => :messages
 
 
 end

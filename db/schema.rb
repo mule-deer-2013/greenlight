@@ -20,15 +20,17 @@ ActiveRecord::Schema.define(:version => 20131002053936) do
   end
 
   create_table "matches", :force => true do |t|
-    t.integer "user_1"
-    t.integer "user_2"
-    t.string  "user_1_vote"
-    t.string  "user_2_vote"
-    t.string  "match_status"
+    t.integer  "user_id"
+    t.integer  "pair_id"
+    t.string   "user_1_vote"
+    t.string   "user_2_vote"
+    t.string   "match_status", :default => "Pending"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "sender_id"
+    t.integer  "user_id"
     t.integer  "reciever_id"
     t.text     "content"
     t.datetime "created_at",  :null => false
