@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
 
 
 
+
     def calculate
       self.distances.each { |distance| distance.calculate_distance(self.id) }
     end
@@ -31,8 +32,9 @@ class User < ActiveRecord::Base
     def create_distances
       User.all.each do |stranger|
         haversine_distance = Haversine.distance(self.latitude, self.longitude, stranger.latitude, stranger.longitude)
-        p ([self.latitude, self.longitude, stranger.latitude, stranger.longitude])
         Distance.create(distance: haversine_distance.to_miles, user_id: self.id, stranger_id: stranger.id)
       end
     end
   end
+
+
