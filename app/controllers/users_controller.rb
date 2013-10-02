@@ -21,9 +21,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find(rand(1..User.all.count))
-    user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
-    render :json => user_data.to_json
+    # user = User.find(rand(1..User.all.count))
+    # user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
+    # render :json => user_data.to_json
 
   end
 
