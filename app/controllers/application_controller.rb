@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery except: [:show, :create]
+  protect_from_forgery except: [:show, :create, :update]
 
-  helper_method :current_user, :logged_in?, :login, :logout
+  helper_method :current_user, :logged_in?, :login, :logout, :authenticate!
 
   def current_user
     @current_user ||= User.find_by_id(session[:user_id])
@@ -26,4 +26,12 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   end
+<<<<<<< HEAD
+=======
+
+  def authenticate!(password)
+    #set status to :unauthorized (401) unless logged_in?
+  end
+
+>>>>>>> master
 end

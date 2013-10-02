@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://www.rubygems.org'
 
 gem 'rails', '3.2.13'
 
@@ -23,7 +23,7 @@ end
 
 gem 'rspec-rails'
 group :development, :test do
-  
+
   gem 'shoulda-matchers'
 
 end

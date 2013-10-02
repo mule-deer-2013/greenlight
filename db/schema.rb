@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131001163546) do
+ActiveRecord::Schema.define(:version => 20131001191831) do
+
+  create_table "matches", :force => true do |t|
+    t.integer "user_1"
+    t.integer "user_2"
+    t.string  "user_1_vote"
+    t.string  "user_2_vote"
+    t.string  "match_status", :default => "Pending"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -26,8 +34,9 @@ ActiveRecord::Schema.define(:version => 20131001163546) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
-    t.integer  "longtitude"
+    t.integer  "longitude"
     t.integer  "latitude"
+    t.string   "location"
   end
 
   create_table "users_votes", :force => true do |t|
@@ -42,5 +51,7 @@ ActiveRecord::Schema.define(:version => 20131001163546) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "votes", ["voter_id"], :name => "index_votes_on_voter_id"
 
 end

@@ -1,0 +1,9 @@
+<%= form_for @vote, url: {action: "create"} do |f| %>
+  <%= f.label :voter_id, 'voter_id' %>:
+   <%= f.text_field :voter_id %><br /> 
+   <%= f.label :voted_on_id, 'voted_on_id' %>:
+   <%= f.text_field :voted_on_id %><br /> 
+   <%= f.label :opinion, 'opinion' %>:
+   <%= f.text_field :opinion %><br /> 
+  <%= f.submit "Update Profile" %>
+<% end %>
