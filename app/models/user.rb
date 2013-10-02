@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
-  attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo, :longitude, :latitude
-  validates_presence_of :name, :email, :sex, :sex_preference, :age, :password_digest
+  attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo
+  validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
   validates_uniqueness_of :email
   # # geocoded_by :latitude, :longitude
   # after_create :geocode
@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_attached_file :photo,
   :styles => {
     :medium => "400x400"
+
     },
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -18,6 +19,7 @@ class User < ActiveRecord::Base
 
     has_many :distances
     has_many :strangers, :through => :distances
+    has_and_belongs_to_many :votes
 
     after_create :create_distances
     after_save :calculate
@@ -36,5 +38,7 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+
 
 
