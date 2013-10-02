@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20131002050436) do
-
+ActiveRecord::Schema.define(:version => 20131002053936) do
 
   create_table "distances", :force => true do |t|
     t.integer "user_id"
@@ -26,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20131002050436) do
     t.integer "user_2"
     t.string  "user_1_vote"
     t.string  "user_2_vote"
-    t.string  "match_status"
+    t.string  "match_status", :default => "Pending"
   end
 
   create_table "messages", :force => true do |t|
