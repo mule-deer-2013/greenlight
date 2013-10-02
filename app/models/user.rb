@@ -10,15 +10,22 @@ class User < ActiveRecord::Base
   has_attached_file :photo,
   :styles => {
     :medium => "400x400"
+    },
+    :storage => :s3,
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :path => ":attachment/:id/:style.:extension",
+    :bucket => "greenlight"
 
-<<<<<<< HEAD
+    has_many :distances
+    has_many :strangers, :through => :distances
+    has_and_belongs_to_many :votes
 
-  has_and_belongs_to_many :votes
+    # after_create :create_distances
+    # after_save :calculate
 
+  
 
-  has_and_belongs_to_many :votes
-
-  def get_potentials_for_user
+    def get_potentials_for_user
   
     if self.sex == 'male'
       if self.sex_preference == "men"
@@ -38,21 +45,7 @@ class User < ActiveRecord::Base
       end
     end
   end
-end
 
-=======
-    },
-    :storage => :s3,
-    :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :path => ":attachment/:id/:style.:extension",
-    :bucket => "greenlight"
-
-    has_many :distances
-    has_many :strangers, :through => :distances
-    has_and_belongs_to_many :votes
-
-    after_create :create_distances
-    after_save :calculate
 
 
 
@@ -71,5 +64,3 @@ end
 
 
 
-
->>>>>>> master

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    p params
     #current user that votes 
     user = User.find(params[:id])
     # raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
@@ -50,7 +50,9 @@ class UsersController < ApplicationController
   def create
     user = User.new(name: params[:name], age: params[:age], sex: params[:sex], sex_preference: params[:sex_preference], email: params[:email], tagline: params[:tagline], photo: params[:photo])
     user.password = params[:password]
-    p "*"*40
+    p "user*"*20
+    p user
+    p "params*"*20
     p params
 
 
