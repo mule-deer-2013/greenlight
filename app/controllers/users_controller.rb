@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def show
-<<<<<<< HEAD
+
     #current user that votes 
     user = User.find(params[:id])
     # raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
@@ -45,15 +45,8 @@ class UsersController < ApplicationController
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
       render :json => user_data.to_json
     end
-=======
 
-    raise ArgumentError, "#show can only return a random user" unless params[:id] == "random"
-    offset = rand(User.count)
-    user = User.first(:offset => offset)
-    user_data = { id: user.id, name: user.name, age: user.age, sex: user.sex, sexPreference: user.sex_preference, photo: user.photo.url }
-    render :json => user_data.to_json
 
->>>>>>> master
   end
 
   def create
