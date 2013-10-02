@@ -1,12 +1,6 @@
 
 class UsersController < ApplicationController
-  before_filter :cors
-  before_filter :important_stuff
-
-  def important_stuff #also, maybe this could be defined in sessions controller
-    ## you are logged in
-    ## AND the profile you are attempting to view/create/update/edit/whatever is absolutely your profile
-  end
+  before_filter :cors, :authenticate!
 
   def index
     randomUI = User.all.count
@@ -25,8 +19,6 @@ class UsersController < ApplicationController
   	user = User.find(params[:id])
     user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
     render :json => { :user => @user }
-
-
   end
 
   def show
@@ -46,10 +38,10 @@ class UsersController < ApplicationController
     p params
 
 
-
     if user.save
       login(user)
-      render :json => user.to_json
+      #should i use user.to_json or current_user.to_json here?
+      render :json => current_user.to_json
     else
       render :json => "false"
     end
@@ -57,6 +49,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    #should this go to sessions controller instead?
     @user = User.new
   end
 
