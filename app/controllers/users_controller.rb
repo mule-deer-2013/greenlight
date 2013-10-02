@@ -1,6 +1,6 @@
 
 class UsersController < ApplicationController
-  before_filter :cors, :authenticate!
+  before_filter :cors
 
   def index
     # randomUI = User.all.count
@@ -33,14 +33,17 @@ class UsersController < ApplicationController
     # user = User.first(:offset => offset)
     # psuedocode: write method that returns a user object according to the 
     # users sex and their sex_pref.  
-   
+    p "*******************************"
+    p user
     potential = user.get_potentials_for_user
+    p potential
+
     if potential == nil 
        render :json => "No matches"
     else
       potential.delete(user)
       random = rand(potential.count)
-      votee = User.first(:offset => random) 
+      votee = User.find(random) 
          
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
       render :json => user_data.to_json

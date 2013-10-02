@@ -22,23 +22,22 @@ class User < ActiveRecord::Base
   def get_potentials_for_user
   
     if self.sex == 'male'
-      User.where(sex: 'female')
-      # if self.sex_preference == "male"
-      #   User.where(sex: "male", sex_preference: "men") 
-      # elsif self.sex_preference == "female"
-      #   User.where(sex: "female", sex_preference: "men")
-      # elsif self.sex_preference == "both"
-      #   User.where(sex_preference: "men")
-    
-    else
-      User.where(sex: 'male')
-      # if self.sex_preference == "male"
-      #   User.where(sex: "male", sex_preference: "women")
-      # elsif self.sex_preference == "female"
-      #   User.where(sex: "female", sex_preference: "women")
-      # elsif self.sex_preference == "both"
-      #   User.where(sex_preference: "women")
+      if self.sex_preference == "men"
+        User.where(sex: "male", sex_preference: "men") 
+      elsif self.sex_preference == "female"
+        User.where(sex: "female", sex_preference: "men")
+      elsif self.sex_preference == "both"
+        User.where(sex_preference: "men") && User.where(sex_preference: "women")
       end
+    else
+      if self.sex_preference == "men"
+        User.where(sex: "male", sex_preference: "women")
+      elsif self.sex_preference == "women"
+        User.where(sex: "female", sex_preference: "women")
+      elsif self.sex_preference == "both"
+        User.where(sex_preference: "men") && User.where(sex_preference: "women")
+      end
+    end
   end
 end
 
