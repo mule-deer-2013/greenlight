@@ -15,13 +15,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    #do i have to have if statement here?
-    if current_user
-      current_user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
-      render :json => current_user.to_json
-    else
-      render :json => "current_user does not exist"
-    end
+  	user = User.find(params[:id])
+    user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
+    render :json => { :user => @user }
   end
 
   def show
@@ -49,7 +45,6 @@ class UsersController < ApplicationController
       render :json => user_data.to_json
     end
 
-
   end
 
   def create
@@ -62,7 +57,7 @@ class UsersController < ApplicationController
     if user.save
       login(user)
       #should i use user.to_json or current_user.to_json here?
-      render :json => current_user.to_json
+      render :json => user.to_json
     else
       render :json => "false"
     end
