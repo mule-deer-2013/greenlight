@@ -259,3 +259,32 @@ vendor
   External libraries that the application depends on. Also includes the plugins
   subdirectory. If the app has frozen rails, those gems also go here, under
   vendor/rails/. This directory is in the load path.
+
+  # def user_type
+#   case 
+#     when self.sex == "male"    &&   self.sex_preference == "men"   ; :m4m
+#     when self.sex == "male"    &&   self.sex_preference == "women" ; :m4w
+#     when self.sex == "male"    &&   self.sex_preference == "both"  ; :m4b
+#     when self.sex == "female"  &&   self.sex_preference == "men"   ; :w4m
+#     when self.sex == "female"  &&   self.sex_preference == "women" ; :w4w
+#     when self.sex == "female"  &&   self.sex_preference == "both"  ; :w4b
+#   end
+# end
+
+# MATCHINGS = 
+#   { :m4m => { sex: "male"    , sex_preference: "men"   },
+#     :m4w => { sex: "male"    , sex_preference: "women" },
+#     :w4m => { sex: "female"  , sex_preference: "men"   },
+#     :w4w => { sex: "female"  , sex_preference: "women" },
+#     :m4b => {                  sex_preference: "men"   },
+#     :w4b => {                  sex_preference: "women" } 
+#   } # dont' want to filter sex on the 4b's. 
+
+
+
+# def get_potentials_for_user
+#   User.where(MATCHINGS[user_type])
+# end
+
+
+
