@@ -1,11 +1,13 @@
 class SessionsController < ApplicationController
+
   def create
-    user = User.find_by_email(params[:email].downcase)
-    if user && user.authenticate(params[:password])
-      login user
+    # will this throw error if email is not in DB?
+    user = User.find_by_email(params[:email])
+
+    if user && user.authenticate!(params[:password])
+      login(user)
       render :json => user.to_json
     else
-
       render :json => 'error'
     end
   end

@@ -1,6 +1,6 @@
 
 class UsersController < ApplicationController
-  before_filter :cors
+  before_filter :cors, :authenticate!
 
   def index
     randomUI = User.all.count
@@ -15,8 +15,13 @@ class UsersController < ApplicationController
   end
 
   def update
-  	user = User.find(params[:id])
-    user.update_attributes(sex_preference: params[:sex_preference], tagline: params[:tagline], sex: params[:sex])
+    #do i have to have if statement here?
+    if current_user
+      current_user.update_attributes(sex_preference: params[:sex_preference], tagline: params[:tagline], sex: params[:sex])
+      render :json => current_user.to_json
+    else
+      render :json => "current_user does not exist"
+    end
   end
 
   def show
@@ -33,10 +38,10 @@ class UsersController < ApplicationController
     p "*"*40
     p params[:photo]
 
-
     if user.save
       login(user)
-      render :json => user.to_json
+      #should i use user.to_json or current_user.to_json here?
+      render :json => current_user.to_json
     else
       render :json => "false"
     end
@@ -44,6 +49,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    #should this go to sessions controller instead?
     @user = User.new
   end
 
