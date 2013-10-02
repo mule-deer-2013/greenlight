@@ -1,12 +1,16 @@
 class User < ActiveRecord::Base
+  include BCrypt
   has_secure_password
-  attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo
-  validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
-  validates_uniqueness_of :email
+
+  attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo, :longitude, :latitude
+  # validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
+  # validates_uniqueness_of :email
+
 
   has_attached_file :photo,
   :styles => {
     :medium => "400x400"
+
   },
   :storage => :s3,
   :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -18,5 +22,28 @@ class User < ActiveRecord::Base
   has_many :pairs, :through => :matches 
   has_many :recievers, :through => :messages
 
+  has_many :distances
+  has_many :strangers, :through => :distances
+  has_and_belongs_to_many :votes
+
+  after_create :create_distances
+  after_save :calculate
+
+
+
+
+    def calculate
+      self.distances.each { |distance| distance.calculate_distance(self.id) }
+    end
+
+    def create_distances
+      User.all.each do |stranger|
+        haversine_distance = Haversine.distance(self.latitude, self.longitude, stranger.latitude, stranger.longitude)
+        Distance.create(distance: haversine_distance.to_feet, user_id: self.id, stranger_id: stranger.id)
+      end
+    end
 
 end
+
+
+

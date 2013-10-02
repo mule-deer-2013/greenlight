@@ -2,19 +2,25 @@ class SessionsController < ApplicationController
 
   def create
     # will this throw error if email is not in DB?
-    user = User.find_by_email(params[:email])
-
-    if user && user.authenticate!(params[:password])
+    p "hellloooooooooo"
+    p user = User.find_by_email(params[:email])
+    p params[:password]
+    #breaking here!!
+    if user && user.authenticate(params[:password])
+      p "user was authenticated"
       login(user)
-      render :json => user.to_json
+      p session
+      p "login worked"
+      render :json => current_user.to_json
     else
-      render :json => 'error'
+      p "user was not authenticated"
+      render :json => ('errorer').to_json
     end
   end
 
   def destroy
     logout
-    redirect_to root_url
+    render :json => ('logged out').to_json
   end
 
 end

@@ -17,22 +17,24 @@ class VotesController < ApplicationController
     p '*****************************'
     match = Hash.new
 
+
     if (params[:opinion] == "yes") && (Vote.where(voter_id: params[:voted_on_id], 
         voted_on_id: params[:voter_id], opinion: "yes").count > 1)
         Match.create(user_id: params[:voter_id], pair_id: params[:voted_on_id], match_status: "yes")
+
         p match
     p 'true *****************************'
         p match
         match[:status] = "yes"
         match[:votee] = User.find(params[:voted_on_id])
         render json: match.to_json
-      else 
+      else
       p 'false *****************************'
         p match
         match[:status] = "no"
         p match
         render json: match.to_json
-    end      
+    end
   end
-    
+
 end
