@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20131003045058) do
     t.string  "match_status", :default => "Pending"
   end
 
-  create_table "table_name", :force => true do |t|
+  create_table "messages", :force => true do |t|
     t.string   "topic"
     t.text     "body"
     t.integer  "received_messageable_id"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(:version => 20131003045058) do
     t.boolean  "sender_permanent_delete",    :default => false
   end
 
-  add_index "table_name", ["ancestry"], :name => "index_table_name_on_ancestry"
-  add_index "table_name", ["sent_messageable_id", "received_messageable_id"], :name => "acts_as_messageable_ids"
+  add_index "messages", ["ancestry"], :name => "index_messages_on_ancestry"
+  add_index "messages", ["sent_messageable_id", "received_messageable_id"], :name => "acts_as_messageable_ids"
 
   create_table "users", :force => true do |t|
     t.string   "name"

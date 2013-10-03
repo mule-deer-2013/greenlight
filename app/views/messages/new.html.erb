@@ -1,0 +1,6 @@
+ <%= simple_form_for ActsAsMessageable::Message.new, :url => create_message_users_path, :method => :post do |f| %>
+                <%= f.hidden_field :to, value: @gear.user.email %>
+                <%= f.input :body %>
+                <%= f.input :topic %>
+                <%= f.button :submit, class: 'btn' %>
+ <% end %>
