@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo, :longitude, :latitude
-  validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
+  validates_presence_of :name, :email, :sex, :sex_preference, :age
   validates_uniqueness_of :email
 
 
@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
     has_many :strangers, :through => :distances
     has_and_belongs_to_many :votes
 
-    # after_create :create_distances
-    # after_save :calculate
+    after_create :create_distances
+    after_save :calculate
 
     def get_potentials_for_user
       all_potentials = User.joins('JOIN distances AS d ON users.id = d.stranger_id')
