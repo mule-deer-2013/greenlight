@@ -27,14 +27,6 @@ ActiveRecord::Schema.define(:version => 20131003045058) do
     t.string  "match_status", :default => "Pending"
   end
 
-  create_table "messages", :force => true do |t|
-    t.integer  "sender_id"
-    t.integer  "reciever_id"
-    t.text     "content"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "table_name", :force => true do |t|
     t.string   "topic"
     t.text     "body"

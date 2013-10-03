@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :email, :sex, :sex_preference, :age
   validates_uniqueness_of :email
 
-  acts_as_messageable :table_name => "table_with_messages", # default 'messages'
-                      :required   => :body                  # default [:topic, :body]
-                      :class_name => "CustomMessages"       # default "ActsAsMessageable::Message",
-                      :dependent  => :destroy               # default :nullify
+  acts_as_messageable :table_name => 'messages', # default 'messages'
+                      :required   => :body,                  # default [:topic, :body]
+                      :class_name => "ActsAsMessageable::Message",     # default "ActsAsMessageable::Message",
+                      :dependent  => :destroy,               # default :nullify
                       :group_messages => true    
 
 

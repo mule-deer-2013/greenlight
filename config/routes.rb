@@ -3,7 +3,6 @@ Greenlight::Application.routes.draw do
   resources :votes
   # resources :users, only: [:index, :new, :create, :show, :edit, :update]
   resources :users
-  resources :messages
   
   match 'users/:id', to: 'users#update', :via => [:post]
   match 'sessions/:id', to: 'sessions#destroy', :via => [:post]
