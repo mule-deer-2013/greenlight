@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20131002050436) do
-
+ActiveRecord::Schema.define(:version => 20131002053936) do
 
   create_table "distances", :force => true do |t|
     t.integer "user_id"
