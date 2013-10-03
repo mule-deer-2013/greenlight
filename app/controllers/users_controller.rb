@@ -51,8 +51,25 @@ class UsersController < ApplicationController
   end
 
   def new
-    #should this go to sessions controller instead?
+   #should this go to sessions controller instead?
     @user = User.new
+  end
+
+
+   def new_message
+    @message = ActsAsMessageable::Message.new
+  end
+
+  def create_message
+    p "**************************************"
+    p params[:content]['0']['value'].chomp
+
+    @from = User.find(params[:user_id])
+    @to = User.find(params[:receiver_id])
+    @from.send_message(@to, params[:content]['0']['value'])
+    conversation = @to.received_messages
+
+    render json: conversation.to_json
   end
 
 end
