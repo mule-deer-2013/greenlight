@@ -24,21 +24,16 @@ class User < ActiveRecord::Base
     after_save :calculate
 
     def get_potentials_for_user
-      all_potentials = User.joins('JOIN distances AS d ON users.id = d.stranger_id')
-      .where('users.id != ?', self.id)
+      # we'll do a LEFT OUTER JOIN on the votes table such that
+      # we can find users about whom we *haven't* yet voted
+      # See: http://www.codinghorror.com/blog/2007/10/a-visual-explanation-of-sql-joins.html
+      User.joins("JOIN distances AS d ON users.id = d.stranger_id")
+      .joins("LEFT OUTER JOIN votes AS v ON (v.voted_on_id = users.id AND v.voter_id = #{self.id})")
+      .where("users.id != ?", self.id)
+      .where("v.opinion IS NULL")
       .where(sex: self.sex_preference, sex_preference: self.sex)
-      .order('d.distance DESC')
-      # potentials = []
-      # all_potentials.each do |user|
-      #   # ensure that self.id and user.id are not in the votes table together, if they're not
-      #   user.votes.each do |vote|
-      #     if self.id != vote.user_id
-      #       potentials << user
-      #     end
-      #   end
-      # end 
-      # p potentials 
-      # potentials
+      .order("d.distance ASC")
+      .limit(1)
     end
 
     def calculate

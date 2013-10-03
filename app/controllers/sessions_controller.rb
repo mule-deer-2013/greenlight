@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       render :json => current_user.to_json
     else
       p "user was not authenticated"
-      render :json => ('errorer').to_json
+      render status: :unauthorized, json: { error: 'invalid email or password' }.to_json
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002053936) do
+ActiveRecord::Schema.define(:version => 20131003165753) do
 
   create_table "distances", :force => true do |t|
     t.integer "user_id"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20131002053936) do
     t.integer  "photo_file_size"
     t.float    "longitude",          :default => 0.0
     t.float    "latitude",           :default => 0.0
-    t.string   "location"
   end
 
   create_table "users_votes", :force => true do |t|

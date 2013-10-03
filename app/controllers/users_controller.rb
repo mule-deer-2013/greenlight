@@ -22,16 +22,15 @@ class UsersController < ApplicationController
 
   def show
     p params
-    #current user that votes
-
     user = User.find(params[:id])
     potentials = user.get_potentials_for_user
+    p '*potentials'*20 
     p potentials
     if potentials.empty?
       puts "no potentials"
-       render :json => "Currently, there are no singles around. Check again soon.".to_json
+      render :json => {:error => "no matches"}
     else
-      votee = potentials.last
+      votee = potentials.first
       # p votee         
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
       render :json => user_data.to_json

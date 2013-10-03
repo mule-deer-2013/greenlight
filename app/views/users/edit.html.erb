@@ -6,7 +6,7 @@
   <%= f.label :birthday, 'Birthday' %>:
   <%= f.date_select(:birthday, :order => [:month, :day, :year]) %><br />
   <%= f.label :sex_preference, 'Sexual Preference' %>:
-  <%= f.select :sex_preference, [['Men','men'],['Women','women'],['Both','both']] %><br /> 
+  <%= f.select :sex_preference, [['Men','m'],['Women','f'],['Both','both']] %><br /> 
   <%= f.label :tagline, 'Tagline' %>:
    <%= f.text_field :tagline %><br /> 
   <%= f.submit "Update Profile" %>
