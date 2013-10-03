@@ -32,7 +32,7 @@ class UsersController < ApplicationController
        render :json => "Currently, there are no singles around. Check again soon.".to_json
     else
       votee = potentials.last
-      # p votee         
+      # p votee
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
       render :json => user_data.to_json
     end
