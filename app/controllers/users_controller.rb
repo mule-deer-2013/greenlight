@@ -27,8 +27,11 @@ class UsersController < ApplicationController
     p '*potentials'*20 
     p potentials
     if potentials.empty?
-      puts "no potentials"
-      render :json => {:error => "no matches"}
+      # puts "no potentials"
+      # render :json => {:error => "no matches"}
+      votee = user  
+      user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
+      render :json => user_data.to_json
     else
       votee = potentials.first   
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }

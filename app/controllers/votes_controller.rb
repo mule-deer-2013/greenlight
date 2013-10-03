@@ -17,9 +17,10 @@ class VotesController < ApplicationController
 
 
     if ((params[:opinion] == "yes") && (Vote.where(voter_id: params[:voted_on_id], voted_on_id: params[:voter_id], opinion: "yes").count > 0))
-        match[:status] = "yes"
-        match[:votee] = User.find(params[:voted_on_id])
-        render json: match.to_json
+      votee = User.find(params[:voted_on_id])
+      match = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url, status: "yes" }
+      render json: match.to_json
+
       else
         match[:status] = "no"
         p match

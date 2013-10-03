@@ -28,6 +28,9 @@ def index
 
   def create
     @to = User.find_by_email(params[:message][:to])
-    current_user.send_message(@to, params[:message][:topic], params[:message][:body])
+    vote_objects = current_user.send_message(@to, params[:message][:topic], params[:message][:body])
+    p "MESSAGEING ***********************************"
+    p vote_objects
+    render json: vote_objects.to_json
   end
 end
