@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     #current user that votes
 
     user = User.find(params[:id])
+    
     # potentials = user.get_potentials_for_user
     # p potentials
     # if potentials.empty?
@@ -33,6 +34,7 @@ class UsersController < ApplicationController
     # else
       votee = user
       # p votee         
+
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
       render :json => user_data.to_json
     # end

@@ -43,8 +43,8 @@ class User < ActiveRecord::Base
       #       potentials << user
       #     end
       #   end
-      # end 
-      # p potentials 
+      # end
+      # p potentials
       # potentials
     end
 
