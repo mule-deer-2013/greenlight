@@ -14,13 +14,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    #do i have to have if statement here?
-    if current_user
-      current_user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
+      user = User.find(params[:id])
+      user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
       render :json => current_user.to_json
-    else
-      render :json => ("current_user does not exist").to_json
-    end
+
   end
 
   def show
