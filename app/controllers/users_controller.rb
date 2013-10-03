@@ -25,19 +25,17 @@ class UsersController < ApplicationController
     #current user that votes
 
     user = User.find(params[:id])
-    
-    # potentials = user.get_potentials_for_user
-    # p potentials
-    # if potentials.empty?
-    #   puts "no potentials"
-    #    render :json => "Currently, there are no singles around. Check again soon.".to_json
-    # else
-      votee = user
-      # p votee         
-
+    potentials = user.get_potentials_for_user
+    p potentials
+    if potentials.empty?
+      puts "no potentials"
+       render :json => "Currently, there are no singles around. Check again soon.".to_json
+    else
+      votee = potentials.last
+      # p votee
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
       render :json => user_data.to_json
-    # end
+    end
   end
 
 
@@ -71,9 +69,9 @@ class UsersController < ApplicationController
     @from = User.find(params[:user_id])
     @to = User.find(params[:receiver_id])
     @from.send_message(@to, params[:content]['0']['value'])
+    conversation = @to.received_messages
 
-
-    render json: @to.received_messages.to_json
+    render json: conversation.to_json
   end
 
 end
