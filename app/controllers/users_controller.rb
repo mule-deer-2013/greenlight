@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   end
 
   def update
+
+     p "*1" * 30
       user = User.find(params[:id])
       user.update_attributes(longitude: params[:longitude], latitude: params[:latitude])
       render :json => current_user.to_json
@@ -24,14 +26,15 @@ class UsersController < ApplicationController
     p params
     user = User.find(params[:id])
     potentials = user.get_potentials_for_user
-    p '*potentials'*20 
+    p '*potentials'*20
     p potentials
     if potentials.empty?
       puts "no potentials"
-      render :json => {:error => "no matches"}
+      render :json => {:e => "no matches"}
     else
-      votee = potentials.first   
+      votee = potentials.first
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
+      # need to pass in the location of the user as well
       render :json => user_data.to_json
     end
   end
