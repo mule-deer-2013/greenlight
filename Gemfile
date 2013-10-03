@@ -43,6 +43,7 @@ gem 'aws-s3'
 gem 'aws-sdk'
 gem 'rmagick'
 gem 'haversine'
+gem "acts-as-messageable", "~> 0.4.8"
 
 
 # Use unicorn as the app server
