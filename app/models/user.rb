@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   has_secure_password
 
   attr_accessible :name, :sex, :sex_preference, :age, :email, :tagline, :password, :photo, :longitude, :latitude
-  # validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
-  # validates_uniqueness_of :email
+  validates_presence_of :name, :email, :sex, :sex_preference, :age, :password
+  validates_uniqueness_of :email
 
 
   has_attached_file :photo,
@@ -23,32 +23,23 @@ class User < ActiveRecord::Base
     # after_create :create_distances
     # after_save :calculate
 
-
-
     def get_potentials_for_user
-
-    if self.sex == 'male'
-      if self.sex_preference == "men"
-        User.where(sex: "male", sex_preference: "men")
-      elsif self.sex_preference == "women"
-        User.where(sex: "female", sex_preference: "men")
-      elsif self.sex_preference == "both"
-        User.where(sex_preference: "men") && User.where(sex_preference: "women")
-      end
-    else
-      if self.sex_preference == "men"
-        User.where(sex: "male", sex_preference: "women")
-      elsif self.sex_preference == "women"
-        User.where(sex: "female", sex_preference: "women")
-      elsif self.sex_preference == "both"
-        User.where(sex_preference: "men") && User.where(sex_preference: "women")
-      end
+      all_potentials = User.joins('JOIN distances AS d ON users.id = d.stranger_id')
+      .where('users.id != ?', self.id)
+      .where(sex: self.sex_preference, sex_preference: self.sex)
+      .order('d.distance DESC')
+      # potentials = []
+      # all_potentials.each do |user|
+      #   # ensure that self.id and user.id are not in the votes table together, if they're not
+      #   user.votes.each do |vote|
+      #     if self.id != vote.user_id
+      #       potentials << user
+      #     end
+      #   end
+      # end 
+      # p potentials 
+      # potentials
     end
-  end
-
-
-
-
 
     def calculate
       self.distances.each { |distance| distance.calculate_distance(self.id) }
@@ -61,6 +52,6 @@ class User < ActiveRecord::Base
       end
     end
 
-end
+  end
 
 
