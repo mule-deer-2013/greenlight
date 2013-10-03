@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       # we'll do a LEFT OUTER JOIN on the votes table such that
       # we can find users about whom we *haven't* yet voted
       # See: http://www.codinghorror.com/blog/2007/10/a-visual-explanation-of-sql-joins.html
-      User.joins("JOIN distances AS d ON users.id = d.stranger_id")
+      potentials = User.joins("JOIN distances AS d ON users.id = d.stranger_id")
       .joins("LEFT OUTER JOIN votes AS v ON (v.voted_on_id = users.id AND v.voter_id = #{self.id})")
       .where("users.id != ?", self.id)
       .where("v.opinion IS NULL")
@@ -48,7 +48,5 @@ class User < ActiveRecord::Base
     end
 
   end
-
-  
 
 
