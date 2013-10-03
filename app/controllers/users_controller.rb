@@ -30,8 +30,7 @@ class UsersController < ApplicationController
       puts "no potentials"
       render :json => {:error => "no matches"}
     else
-      votee = potentials.first
-      # p votee         
+      votee = potentials.first   
       user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
       render :json => user_data.to_json
     end

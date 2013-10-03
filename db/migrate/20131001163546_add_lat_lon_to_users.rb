@@ -9,3 +9,5 @@ class AddLatLonToUsers < ActiveRecord::Migration
   remove_column :users, :latitude
   end
 end
+
+
