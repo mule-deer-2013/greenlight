@@ -22,14 +22,33 @@ class User < ActiveRecord::Base
   has_many :pairs, :through => :matches 
   has_many :recievers, :through => :messages
 
-  has_many :distances
-  has_many :strangers, :through => :distances
-  has_and_belongs_to_many :votes
-
-  after_create :create_distances
-  after_save :calculate
 
 
+    # after_create :create_distances
+    # after_save :calculate
+
+
+
+    def get_potentials_for_user
+
+    if self.sex == 'male'
+      if self.sex_preference == "men"
+        User.where(sex: "male", sex_preference: "men")
+      elsif self.sex_preference == "women"
+        User.where(sex: "female", sex_preference: "men")
+      elsif self.sex_preference == "both"
+        User.where(sex_preference: "men") && User.where(sex_preference: "women")
+      end
+    else
+      if self.sex_preference == "men"
+        User.where(sex: "male", sex_preference: "women")
+      elsif self.sex_preference == "women"
+        User.where(sex: "female", sex_preference: "women")
+      elsif self.sex_preference == "both"
+        User.where(sex_preference: "men") && User.where(sex_preference: "women")
+      end
+    end
+  end
 
 
     def calculate
@@ -44,6 +63,5 @@ class User < ActiveRecord::Base
     end
 
 end
-
 
 

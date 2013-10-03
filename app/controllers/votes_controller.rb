@@ -34,7 +34,12 @@ class VotesController < ApplicationController
         match[:status] = "no"
         p match
         render json: match.to_json
+
+      end      
+
+
     end
+
   end
 
-end
+
