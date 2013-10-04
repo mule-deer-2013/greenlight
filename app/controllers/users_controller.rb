@@ -30,11 +30,15 @@ class UsersController < ApplicationController
     p potentials
     if potentials.empty?
       puts "no potentials"
-      render :json => {:error => "no matches"}
+      render :json => {:e => "no matches"}
     else
       votee = potentials.first
-      user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url, tagline: votee.tagline }
+      p "*"*30
+      distance_object = Distance.where(user_id: params[:id], stranger_id: votee.id)
+    # distance = distance_object[0].distance.round
+      user_data = { id: votee.id, name: votee.name, tagline: votee.tagline, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url}
       # need to pass in the location of the user as well
+
       render :json => user_data.to_json
     end
   end
