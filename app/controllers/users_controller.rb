@@ -29,15 +29,11 @@ class UsersController < ApplicationController
     p '*potentials'*20
     p potentials
     if potentials.empty?
-      # puts "no potentials"
-      # render :json => {:error => "no matches"}
-      votee = user  
-      user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
-      render :json => user_data.to_json
-
+      puts "no potentials"
+      render :json => {:error => "no matches"}
     else
       votee = potentials.first
-      user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url }
+      user_data = { id: votee.id, name: votee.name, age: votee.age, sex: votee.sex, sexPreference: votee.sex_preference, photo: votee.photo.url, tagline: votee.tagline }
       # need to pass in the location of the user as well
       render :json => user_data.to_json
     end
@@ -63,9 +59,17 @@ class UsersController < ApplicationController
   end
 
 
-   def new_message
+  def new_message
     @message = ActsAsMessageable::Message.new
   end
+
+  def show_message
+    @to = User.find(params[:user_id])
+    conversation = @to.received_messages
+
+    render json: conversation.to_json
+  end
+
 
   def create_message
     p "**************************************"

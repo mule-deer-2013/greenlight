@@ -4,6 +4,7 @@ Greenlight::Application.routes.draw do
   # resources :users, only: [:index, :new, :create, :show, :edit, :update]
   resources :users do
      get "new_message", :on => :collection
+     get "show_message", :on => :collection
      post "create_message", :on => :collection
   end
 
