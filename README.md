@@ -1,6 +1,6 @@
 # greenlight
 
-## Final project from Dev Bootcamp
+## Real-time dating app
 
 ## Team Members
 
